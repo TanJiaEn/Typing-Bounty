@@ -1,0 +1,410 @@
+#Code 
+import random
+import string
+
+#If Error:
+def error():
+    return print('Input error, returning to main screen.')
+
+#for Level 1
+def move():
+    k = random.choice(string.ascii_letters)
+    K = [k.lower()]
+    return K
+
+def str_move():
+    k = random.choice(string.ascii_letters)
+    K = str(k)
+    return K
+
+#for Level 2 onwards
+def n_move(number):
+    k = random.randint(1,number)
+    K = []
+    return K
+
+#Scoring
+def encode(n):
+    t = []
+    new = []
+    for i in n:
+        new += i
+    for e in new:
+        t.append(chr(ord(e)))
+    return t
+
+def lst(user_lst):
+    if user_lst != '':
+        key = ['pelican','dog','cat','jaguar','deer','unknown','he','she','who','they','why','how','when','then','mimic','hehe']
+    else:
+        key = user_lst
+    ans = random.shuffle(user_lst)
+    return ans[0]
+
+def game(tally):
+    score = 0
+    plyer = encode(reply)
+    for i in plyer:
+        if ord(i) in key:
+            score += 1
+        if i in tally:
+            score += 2
+    return score,plyer
+
+#All definitons are above
+
+#Below is the Game
+
+
+c = '' #for player choice later
+menu = 0
+Login = True
+gameplay = False #The Main Game
+lvl_diff = 1
+
+#Content
+import random
+rando = 1
+tally = []
+Zero = ['-']
+
+round = 1
+count = 1
+
+#Start of Game:
+print('The level difficulty is', lvl_diff)
+while gameplay == True:
+    #Level 1
+    if lvl_diff == 1:
+        score = 0
+        print('Round:',round)
+        for i in range(3):
+            for k in range(5):
+                total = move()
+                if total in tally:
+                    print(Zero, end = '')
+                elif random.randint(1,2) == 1:
+                    print(Zero, end = '')
+                else:
+                    tally.append(total)
+                    print(total, end = '')
+            print()
+        reply = input('Appearing letters: ')
+        for i in tally:
+            score += 1
+        if score == len(tally):
+            print('Bonus Round!')
+            bonus_spree = True
+            while bonus_spree == True:
+                bonus_letter = str_move()
+                print(bonus_letter)
+                user = str(input())
+                if str(bonus_letter) != user:
+                    print('End of Bonus!')
+                    print('Current score:', score)
+                    bonus_spree = False
+                    break
+                else:
+                    score += 10
+
+        gameplay = False
+#-------------------------------------------------------------------------------Just a sectioner
+    #Level 2
+    elif lvl_diff == 2:
+        score = 0
+        print('Round:',round)
+        progress = True
+        while progress == True:
+            for i in range(3):
+                for i in range(5):
+                    num = n_move(9)
+                    if num in tally:
+                        print('[-]', end = '')
+                    else:
+                        tally.append(num)
+                        print(num, end = '')
+                print()
+                round += 1
+                reply = input('Appearing numericals: ')
+                for i in tally:
+                    score += (5*len(tally))
+                if score < len(tally):
+                    score -= 5
+                if score >= (len(tally)*5):
+                    print('Bonus Round!')
+                    bonus_spree = True
+                    while bonus_spree == True:
+                        bonus_num = n_move(50)
+                        print(bonus_num)
+                        user = (input())
+                        if bonus_num != user:
+                            print('End of Game!')
+                            print('Current score:', score, "|Round",round)
+                            bonus_spree = False
+                            progress = False
+                            break
+                        else:
+                            score += 50
+                            print('Current score:', score)
+        gameplay = False
+#-----------------------------------------------------------------------------------------
+    #Level 3
+    elif lvl_diff == 3:
+        score = 0
+        print('Round:',round)
+        progress = True
+        while progress == True:
+            for i in range(random.randint(1,3)):
+                for i in range(random.randint(1,7)):
+                    P = move()
+                    if P in tally:
+                        print(Zero, end = '')
+                    elif random.randint(1,2) == 1:
+                        print(Zero, end = '')
+                    else:
+                        tally.append(P)
+                        print(P, end = '')
+                print()
+                round += 1
+                reply = input('Appearing: ')
+                for i in tally:
+                    score += (5*len(tally))
+                if score < len(tally):
+                    score -= 5
+                if score >= (len(tally)*5):
+                    print('Bonus Round!')
+                    bonus_spree = True
+                    while bonus_spree == True:
+                        bonus_num = n_move(50)
+                        print(bonus_num)
+                        user = (input())
+                        if bonus_num != user:
+                            print('Ending Bonus!')
+                            print('Current score:', score, "|Round",round)
+                            bonus_spree = False
+                            progress = False
+                            break
+                        else:
+                            score += 100
+        gameplay = False
+#Apparently code couldn't start without me duplicating the game on top
+#--------------------------------------------------------------------------
+
+ #Login Page
+while Login == True:
+    print('Printed Bounty! A key in your typing treasures....\n'+ '1. Start Game (Base level)\n'+'2. Start Game (Lvl 2)\n'+'3. Start Game (Lvl3)\n'+'4. Main Menu\n')
+    ur = (input('Selected: ')) #ur is userinput
+    if ur == '1': #Start Game
+        gameplay = True
+        rando = 1
+        Login = False
+        choice = 0
+    elif ur == '2': #Start Game
+        gameplay = True
+        rando = 2
+        Login = False
+        choice = 0
+    elif ur == '3': #Start Game
+        gameplay = True
+        rando = 3
+        Login = False
+        choice = 0
+    elif ur == '4': #Menu
+        menu = True
+        Login = False
+        choice = 0
+    else:
+        print('Invalid')
+        lvl_diff = 0
+        Login = False
+
+
+
+#Menu
+
+if menu == True:
+    print('1. Keyboard Testing')
+    print('2. Select Level.')
+    print('3. Give player feedback.')
+    print('4. Exit')
+    c = int(input('Choice: '))
+    rando = 0
+    if type(c) == int:
+        choice = (c)
+    else:
+        error()
+        Login = True
+
+#########################
+
+
+while choice == 1:
+        rando = 2
+        gameplay = True
+        choice = 0
+
+while choice == 2:
+    print('Current Difficulty:', rando, "|1 is the base bounty level. 2 is the numerical version. 3 is the hybrid. 4 is the User Round. Choose one. \nElse, end with blank.")
+    lvl_diff = (input("Select Difficulty: "))
+    rando = int(lvl_diff)
+    if lvl_diff == '':
+        print('Error')
+    
+    else:
+        rando = int(lvl_diff)
+        gameplay = True
+if choice == 3:
+    print('Are you satisfied with the game?')
+    feedback = input('')
+    if feedback == '':
+        print('Your feedback renders me speechless. I really hope you enjoyed the game!')
+    else:
+        print('Thank you for your comment!')
+
+elif choice == 0:
+    gameplay = True
+
+elif choice == 4:
+    print('Then... Why are you even here?')
+
+################################# The Game (One is above and another is below as apparently the game cannot function otherwise?
+
+Level = rando
+
+#Game
+import random
+
+tally = []
+Zero = ['-']
+
+round = 1
+count = 1
+
+#Level = random
+#Start of Game:
+
+while gameplay == True:
+    print('The level difficulty is', rando)
+    #Level 1
+    if lvl_diff == 1:
+        score = 0
+        print('Round:',round)
+        for i in range(3):
+            for k in range(5):
+                total = move()
+                if total in tally:
+                    print(Zero, end = '')
+                elif random.randint(1,2) == 1:
+                    print(Zero, end = '')
+                else:
+                    tally.append(total)
+                    print(total, end = '')
+            print()
+        reply = input('Appearing letters: ')
+        for i in tally:
+            score += 1
+        if score == len(tally):
+            print('Bonus Round!')
+            bonus_spree = True
+            while bonus_spree == True:
+                bonus_letter = str_move()
+                print(bonus_letter)
+                user = str(input())
+                if bonus_letter != user:
+                    print('End of Bonus!')
+                    print('Current score:', score)
+                    bonus_spree = False
+                    gameplay = False
+                else:
+                    score += 10
+                    round +=1
+                    bonus_spree = False
+
+
+#-------------------------------------------------------------------------------Just a sectioner
+    #Level 2
+    elif lvl_diff == 2:
+        score = 0
+        print('Round:',round)
+        progress = True
+        while progress == True:
+            for i in range(3):
+                for i in range(5):
+                    num = n_move(9)
+                    if num in tally:
+                        print('[-]', end = '')
+                    else:
+                        tally.append(num)
+                        print(num, end = '')
+                print()
+                round += 1
+                reply = input('Appearing numericals: ')
+                for i in tally:
+                    score += (5*len(tally))
+                if score < len(tally):
+                    score -= 5
+                if score >= (len(tally)*5):
+                    print('Bonus Round!')
+                    bonus_spree = True
+                    while bonus_spree == True:
+                        bonus_num = n_move(50)
+                        print(bonus_num)
+                        user = (input())
+                        if bonus_num != user:
+                            print('End of Game!')
+                            print('Current score:', score, "|Round",round)
+                            bonus_spree = False
+                            progress = False
+                            break
+                        else:
+                            score += 50
+                            print('Current score:', score)
+        gameplay = False
+#-----------------------------------------------------------------------------------------
+    #Level 3
+    elif lvl_diff == 3:
+        score = 0
+        print('Round:',round)
+        progress = True
+        while progress == True:
+            for i in range(random.randint(1,3)):
+                for i in range(random.randint(1,7)):
+                    if random.randint(1,2) == 1:
+                        P = move()
+                    else: 
+                        P = n_move(9)
+                    if P in tally:
+                        print(Zero, end = '')
+                    elif random.randint(1,2) == 1:
+                        print(Zero, end = '')
+                    else:
+                        tally.append(P)
+                        print(P, end = '')
+                print()
+                round += 1
+                reply = input('Appearing: ')
+                for i in tally:
+                    score += (5*len(tally))
+                if score < len(tally):
+                    score -= 5
+                if score >= (len(tally)*5):
+                    print('Bonus Round!')
+                    bonus_spree = True
+                    while bonus_spree == True:
+                        bonus_num = n_move(50)
+                        print(bonus_num)
+                        user = (input())
+                        if bonus_num != user:
+                            print('Ending Bonus!')
+                            print('Current score:', score, "|Round",round)
+                            bonus_spree = False
+                            progress = False
+                            gameplay = False
+                        else:
+                            score += (100 + round*10)
+                            round +=1
+                            bonus_spree = False
+
+    else:
+        print('Try again.')
+        gameplay = False
