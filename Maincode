@@ -20,7 +20,7 @@ def str_move():
 #for Level 2 onwards
 def n_move(number):
     k = random.randint(1,number)
-    K = []
+    K = k
     return K
 
 #Scoring
@@ -53,7 +53,7 @@ def game(tally):
 
 #All definitons are above
 
-#Below is the Game
+#Below is the Game, but pls do't mark the above 3 lvls the real ones are below at around line 300.
 
 
 c = '' #for player choice later
@@ -71,7 +71,123 @@ Zero = ['-']
 round = 1
 count = 1
 
-#Start of Game:
+#Start of Game: Placeholder to prevent bug
+print('The level difficulty is', lvl_diff)
+while gameplay == True:
+    #Level 1
+    if lvl_diff == 1:
+        score = 0
+        print('Round:',round)
+        for i in range(3):
+            for k in range(5):
+                total = move()
+                if total in tally:
+                    print(Zero, end = '')
+                elif random.randint(1,2) == 1:
+                    print(Zero, end = '')
+                else:
+                    tally.append(total)
+                    print(total, end = '')
+            print()
+        reply = input('Appearing letters: ')
+        for i in tally:
+            score += 1
+        if score == len(tally):
+            print('Bonus Round!')
+            bonus_spree = True
+            while bonus_spree == True:
+                bonus_letter = str_move()
+                print(bonus_letter)
+                user = str(input())
+                if str(bonus_letter) != user:
+                    print('End of Bonus!')
+                    print('Current score:', score)
+                    bonus_spree = False
+                    break
+                else:
+                    score += 10
+
+        gameplay = False
+#-------------------------------------------------------------------------------Just a sectioner
+    #Level 2
+    elif lvl_diff == 2:
+        score = 0
+        print('Round:',round)
+        progress = True
+        while progress == True:
+            for i in range(3):
+                for i in range(5):
+                    num = n_move(9)
+                    if num in tally:
+                        print('[-]', end = '')
+                    else:
+                        tally.append(num)
+                        print(num, end = '')
+                print()
+                round += 1
+                reply = input('Appearing numericals: ')
+                for i in tally:
+                    score += (5*len(tally))
+                if score < len(tally):
+                    score -= 5
+                if score >= (len(tally)*5):
+                    print('Bonus Round!')
+                    bonus_spree = True
+                    while bonus_spree == True:
+                        bonus_num = n_move(50)
+                        print(bonus_num)
+                        user = (input())
+                        if bonus_num != user:
+                            print('End of Game!')
+                            print('Current score:', score, "|Round",round)
+                            bonus_spree = False
+                            progress = False
+                            break
+                        else:
+                            score += 50
+                            print('Current score:', score)
+        gameplay = False
+#-----------------------------------------------------------------------------------------
+    #Level 3
+    elif lvl_diff == 3:
+        score = 0
+        print('Round:',round)
+        progress = True
+        while progress == True:
+            for i in range(random.randint(1,3)):
+                for i in range(random.randint(1,7)):
+                    P = move()
+                    if P in tally:
+                        print(Zero, end = '')
+                    elif random.randint(1,2) == 1:
+                        print(Zero, end = '')
+                    else:
+                        tally.append(P)
+                        print(P, end = '')
+                print()
+                round += 1
+                reply = input('Appearing: ')
+                for i in tally:
+                    score += (5*len(tally))
+                if score < len(tally):
+                    score -= 5
+                if score >= (len(tally)*5):
+                    print('Bonus Round!')
+                    bonus_spree = True
+                    while bonus_spree == True:
+                        bonus_num = n_move(50)
+                        print(bonus_num)
+                        user = (input())
+                        if bonus_num != user:
+                            print('Ending Bonus!')
+                            print('Current score:', score, "|Round",round)
+                            bonus_spree = False
+                            progress = False
+                            break
+                        else:
+                            score += 100
+        gameplay = False
+#Apparently code couldn't start without me duplicating the game on top
 #--------------------------------------------------------------------------
 
  #Login Page
@@ -79,18 +195,18 @@ while Login == True:
     print('Printed Bounty! A key in your typing treasures....\n'+ '1. Start Game (Base level)\n'+'2. Start Game (Lvl 2)\n'+'3. Start Game (Lvl3)\n'+'4. Main Menu\n')
     ur = (input('Selected: ')) #ur is userinput
     if ur == '1': #Start Game
-        gameplay = True
         rando = 1
+        gameplay = True
         Login = False
         choice = 0
-    elif ur == '2': #Start Game
+    elif ur == '2':
+        rando = 2 #Start Game
         gameplay = True
-        rando = 2
         Login = False
         choice = 0
-    elif ur == '3': #Start Game
+    elif ur == '3':
+        rando = 3 #Start Game
         gameplay = True
-        rando = 3
         Login = False
         choice = 0
     elif ur == '4': #Menu
@@ -152,8 +268,8 @@ elif choice == 4:
     print('Then... Why are you even here?')
 
 ################################# The Game (One is above and another is below as apparently the game cannot function otherwise?
-
-Level = rando
+lvl_diff = rando
+Level = lvl_diff
 
 #Game
 import random
@@ -214,7 +330,8 @@ while gameplay == True:
         while progress == True:
             for i in range(3):
                 for i in range(5):
-                    num = n_move(9)
+                    no = n_move(9)
+                    num = [no]
                     if num in tally:
                         print('[-]', end = '')
                     else:
